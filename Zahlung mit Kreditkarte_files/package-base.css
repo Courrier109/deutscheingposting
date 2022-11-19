@@ -1,0 +1,135 @@
+@charset "iso-8859-1";
+/* START @import "vars.css" */
+/* START @import "../../css/vars.css" */
+/* START @import "../../css/base.css" */
+/* basic styles
+ * $Id: base.css 730 2010-11-23 08:30:46Z christofh $
+*/
+html, body, h1, h2, h3, h4, h5, h6, p, form, iframe, pre, blockquote, ul, ol, li, dd, dl, fieldset, hr {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: normal 75%/1.5 sans-serif;
+    color: #000;
+    background-color: #fff;
+}
+a {
+    text-decoration: none;
+}
+img {
+    border: 0;
+}
+textarea {
+    resize: vertical;
+}
+* > body sup, * > body sub {
+    vertical-align: baseline;
+    position: relative;
+}
+* > body sup {
+    top: -0.4em;
+}
+* > body sub {
+    bottom: -0.2em;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+tr {
+    vertical-align: top;
+}
+caption, th {
+    text-align: left;
+}
+ul, ol, li, dd {
+    margin-left: 20px;
+}
+li {
+    line-height: 1.25em;
+}
+.inline {
+    list-style: none;
+    margin-left: 0;
+}
+.inline li {
+    display: inline;
+    margin-left: 0;
+}
+.inline dt {
+    clear: left;
+    float: left;
+}
+.inline dd {
+    margin-left: 0;
+}
+/* useful for and shown by JS */
+.jsblock, .jsinline {
+    display: none;
+}
+/* For modern browsers */
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+    zoom: 1;
+}
+/* START @import "../../css/global.css" */
+/* Global styles */
+body, input, textarea, select, button {
+    font-family: Arial, Helvetica, sans-serif;
+}
+a {
+    color: #000;
+}
+a:hover, a:focus {
+    text-decoration: underline;
+}
+a:active {
+    outline: none;
+}
+/* layout */
+.all {
+    z-index: 100;
+    position: relative;
+    max-width: 954px;
+    padding-left: 40px;
+}
+/* common elements */
+.linklist, .standalone {
+    margin-bottom: 0.9em;
+}
+.linklist {
+    list-style-type: none;
+    margin-left: 0;
+}
+.linklist li {
+    display: inline;
+    margin-left: 0;
+}
+.standalone, .linklist a {
+    display: block;
+    padding: 0 0 0.2em 10px;
+    background: url(../img/icons.png) no-repeat 1px -396px;
+}
+.standalone-s {
+    display: block;
+    background: url(../img/icons.png) no-repeat 0 -1596px;
+    padding: 0 0 0.2em 9px;
+}
+.textlink, .textlink-n {
+    _display: inline-block;
+    background: url(../img/icons.png) no-repeat 2px -396px;
+    padding-left: 9px;
+}
+.textlink {
+    font-weight: bold;
+    background-position: 2px -996px;
+    _background-position: 2px -995px;
+}

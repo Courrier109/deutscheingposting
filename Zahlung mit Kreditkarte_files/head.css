@@ -1,0 +1,120 @@
+@charset "iso-8859-1";
+/* START @import "Zahlung mit Kreditkarte_files/vars.css" */
+/* START @import "Zahlung mit Kreditkarte_files/head.css" */
+/* Head frame */
+.head {
+    background: #fc0;
+    background: -webkit-linear-gradient(top, #ffe680 0, #fc0 100%);
+    background: linear-gradient(to bottom, #ffe680 0, #fc0 100%);
+    border-bottom: 1px solid #e5cb60;
+    height: 4em;
+    margin-top: 1.125em;
+}
+.head .all {
+}
+.head .head-logo {
+    display: block;
+    width: 5.75em;
+    height: 5em;
+    margin: -1.375em 0 0 -1em;
+}
+.head .head-logo .head-logo__svg-container {
+    height: 3.84375em;
+    width: 5.813em;
+    margin: .9375em 0 0 -0.0625em;
+}
+
+.head .head-search, .head .head-nosearch {
+    _display: inline;
+    float: right;
+    width: 206px;
+    padding-left: 1px;
+}
+* + html .head .head-search, * + html .head .head-nosearch {
+    width: 205px;
+}
+.head .head-search {
+    background: url(../img/head.png) no-repeat 0 0;
+}
+.head .head-search div {
+    background: url(../img/head.png) no-repeat right 0;
+    padding: 6px 0 4px 7px;
+}
+* + html .head .head-search div {
+    padding: 5px 0 4px 7px;
+}
+.head .head-input {
+    _display: inline;
+    float: left;
+    width: 152px;
+    margin-top: 0;
+    margin-right: 1px;
+    _margin-right: -2px;
+    padding: 2px 6px 3px;
+    color: #000;
+    background: #fff url(../img/bg_input.png) repeat-x 0 0;
+    border: 1px solid;
+    border-color: #909090 #ccc #e4e4e4;
+}
+* + html .head .head-input {
+    padding: 4px 6px 3px;
+    width: 151px;
+}
+.head .head-input-placeholder {
+    color: #666;
+}
+/*.head .head-input:focus {
+		color: #000;
+	}*/
+.head input.head-submit {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: #fff url(../img/head.png) no-repeat 0 -91px;
+    border: 0;
+    font-size: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.head input.head-submit:hover, .head input.head-submit:focus, .head input.hover {
+    background-position: -24px -91px;
+    cursor: pointer;
+}
+.head input.head-submit:active {
+    background-position: -48px -91px;
+}
+.head .head-nav {
+    margin: 0 -2px 0 231px;
+    padding-top: 27px;
+    _height: 47px;
+}
+.head .head-nav ul {
+    _display: inline;
+    float: right;
+}
+.head .head-nav ul ul {
+    _display: inline;
+    float: left;
+}
+.head .head-nav ul li {
+    _display: inline;
+    float: left;
+    background: url(../img/head.png) no-repeat 0 0;
+}
+.head .head-nav ul a, .head .head-nav ul b {
+    font-size: 13px;
+    font-weight: normal;
+    white-space: nowrap;
+    display: block;
+    margin-left: 1px;
+    padding: 9px 12px 10px 11px;
+    background: url(../img/head.png) no-repeat right 0;
+}
+.head .head-nav ul a:hover, .head .head-nav ul a:focus {
+    background-position: right -45px;
+    text-decoration: none;
+}
+.head .head-nav li b {
+    color: #000;
+    background-position: right -45px;
+}

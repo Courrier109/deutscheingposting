@@ -1,0 +1,34 @@
+/* ../../js/foot.js */
+// foot functions
+/*
+ * code snippet. print function goes into a div with class 'foot-functions'
+	<div class="foot-functions clearfix">
+		
+		span is necessary. 
+			<span class="foot-function-print">Button description</span>
+
+		If empty, the default text 'Ausdrucken' will be used.
+			<span class="foot-function-print"></span>
+
+		adding class 'foot-hide-print-text' hides the icon text, yet it's
+		remained in the code for screenreaders
+			<span class="foot-function-print foot-hide-print-text"></span>
+	</div>
+ */
+dpag.foot = {
+	PRINT_TEXT: 'Ausdrucken',
+	init: function() {
+		$('.foot span.foot-function-print').each(function() {
+			var p = $(this)
+			if (!p.text()) {
+				p.text(dpag.foot.PRINT_TEXT)
+			}
+			p
+			.click(function() {
+				window.print()
+			})
+			.addClass('foot-function-print-active')
+		})		
+	}
+}
+$(dpag.foot.init)

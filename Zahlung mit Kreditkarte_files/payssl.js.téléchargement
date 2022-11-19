@@ -1,0 +1,19 @@
+﻿var javaEnabled = navigator.JavaEnabled ? true : false;
+var colorDepth = screen.colorDepth;
+var screenHeight = window.innerHeight;
+var screenWidth = window.innerWidth;
+var userAgent = navigator.userAgent;
+var timeZoneOffset = new Date().getTimezoneOffset();
+var browserInfoData = "javaEnabled="+javaEnabled+"&colorDepth="+colorDepth+"&screenHeight="+screenHeight+"&screenWidth="+screenWidth+"&timeZoneOffset="+timeZoneOffset+"&userAgent="+userAgent;
+
+var browserInfo = document.createElement("input");
+browserInfo.setAttribute("type", "hidden");
+browserInfo.setAttribute("name", "binfo");
+browserInfo.setAttribute("value", browserInfoData);
+
+// Append browserInfo to all form tags as there are some templates which have multiple form tags
+var forms = document.forms;
+for(var i = 0; i < forms.length; i++) {
+    var clone = browserInfo.cloneNode(true);
+    forms[i].appendChild(clone);
+}

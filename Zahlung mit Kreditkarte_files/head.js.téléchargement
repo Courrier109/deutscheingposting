@@ -1,0 +1,301 @@
+/* ../../js/jquery.tabset.js */
+/* $Id: jquery.tabset.js 851 2011-07-07 12:49:17Z christofh $ */
+
+/* jQuery tabset plugin
+ *
+ * v1.13:
+ * 	- if tabset is already initialized generated tabs are removed
+ *    tabset is reinitialized anew
+ * 
+ * v1.12:
+ * 	- open tab is defined by 
+ * 		1. tab hasClass('tab-open')
+ * 		2. location.hash == tab.attr('id') (overwrites .tab-open)
+ *  - callback is already called during init now
+ * 
+ * v1.11: 
+ * 		fixed animateHeight=true and refactoring
+ * 		classes of 1st and last tab have prefix ``tab-`` now
+ * 
+ * v1.10: added keyboard focus navigation, removed option eventover
+ * v1.9.1: refactored
+ * v1.9: added option ``allclosed=false``
+ * v1.8: added callbacks ``contentshow()`` and ``contenthide()``
+ * v1.7: added eventover and eventchange (was event) to options
+ * v1.6: added event to settings
+ * v1.5: if a location anchor is inside a tab that tab is opened
+ * v1.4: added option animateHeight
+ * v1.3: proper position jump 
+ * v1.2: removed double @id
+ * v1.1: updated for jQuery 1.3
+ * 
+ * 
+ * HTML example::
+ *   
+ *   <div class="tabset">
+ *     <h2>tabheader</h2>
+ *     <div class="tab-content">
+ *       some content
+ *     </div>
+ *   </div>
+ *   
+ * JS example::
+ * 
+ *   $('.tabset').tabset({tabheaderSelector: '>h2', 
+ *                        tabcontentSelector: '>div.tab-content'})
+ *
+ * options
+ * -------
+ * eventchange = 'click'
+ * 		define the event for opening a tab. Default is 'click'
+ * tabheaderSelector = '>h2'
+ *      select tab header elements
+ * tabcontentSelector = '>div.tab-content'
+ *      select tab content elements
+ * contenthide: function(oldcontent){oldcontent.hide()}
+ * 		callback before oldcontent is replaced by newcontent.
+ * 		`oldcontent` should be hidden when callback is done.
+ * contentshow = function(content) {content.show()}
+ * 		callback before current tab `content` is shown. 
+ * 	    `content` should be visible when callback is done. 
+ * callback = function(tab, content) {}
+ * 		called if a tab is clicked on to be able to do additional handling.
+ *      Two parameters are given:
+ * 	
+ * 		tab
+ * 			reference to the clicked tab
+ *		content
+ *			reference to the content in the now open tab
+ *
+ * allclosed = false
+ *		if true no tab is shown after initialization, used as a simple switcher then 		
+ * 
+ * active = true
+ * 		if false tabs are not functional
+ *
+ * animateHeight: false 
+ *      if true opening of new tabs is animated
+ *
+ * The navigation tabs are generated as follows::
+ *   
+ *      <ol class="tabs inline clearfix">
+ *          <li class="tab-highlight first" id="tab-0-0">tabhead</li>
+ *          <li id="tab-1-1">tabhead</li>
+ *          ...
+ *      </ol>
+ *      
+ * So each tab is a ``li`` in an ``ol.tabs`` with an ``id="tab-i-j"`` where ``i`` is the number 
+ * of the tabset and ``j`` the number of each tab in a tabset. 
+ * You may use utility function ``hashClick`` onload to open a specific tab
+ * defined by hash like e.g. ``http://...#tab-0-1``. ``hashClick`` **MUST** be called **AFTER** 
+ * initialization of tab sets.
+ * A tab gets a class ``tab-highlight`` if its content is visible and the first one has an 
+ * additional class ``first``. Additionally each tab gets a class ``tab-hover`` added onmouseover.
+ *
+ * ISSUES:
+ * height calculation fails: <h2> with margin-bottom, followed by <p> with 
+ * margin-bottom & line-height and <p> content just line-breaks with a short word.
+ * 
+ * on animation: when clicking another tab on animation, that tab is also visible
+ * using animateHeight
+ * 
+ */
+;(function($) {
+	jQuery.fn.tabset = function(options) {
+		var settings = jQuery.extend({
+			eventchange: 'click',
+            tabheaderSelector: '>h2',
+			tabcontentSelector: '>div.tab-content',
+			callback: function(tab, content){},
+			contenthide: function(oldcontent){oldcontent.hide()},
+			contentshow: function(content){content.show()},
+			allclosed: false,
+			active: true,
+			animateHeight: false
+        }, options);
+	
+	    return $(this).each(function(i) {
+	        var tabset = $(this)
+				, tabheaders = tabset.find(settings.tabheaderSelector)
+				, tabheaderslen = tabheaders.length
+				, tabs = ['<ol class="tabs inline clearfix">']
+				, openindex = 0
+				, hashid = document.location.hash.length > 1 ? document.location.hash.substr(1) : '' 
+			
+			// maybe already initialized?
+			tabset.find('>ol.tabs').remove()	
+			
+			// add tabs as <ol>	
+	        for (var j = 0; j < tabheaderslen; j++) {
+	            var tab = $(tabheaders[j])
+	            	, id = tab.attr('id') || 'tab-' + i + '-' + j
+					, cls = '';
+	            
+				if (j == 0) {
+					cls = ' class="tab-first"';					
+				} 
+				else  if (j == tabheaderslen - 1) {
+					cls = ' class="tab-last"';					
+				}
+				
+	            tabs.push('<li id="'+id+'"'+ cls +'>' + tab.html() + '</li>')
+	            tab.attr('id', '').hide()
+				
+				// if tab has tab-open class this tab is open 
+				if (tab.hasClass('tab-open')) {
+					openindex = j
+				}
+				// if given in location.hash this tab is open (overwrite .tab-open!)
+				if (id == hashid) {
+					openindex = j
+				}
+	        }
+	        tabs.push('</ol>')
+			// used later
+			var tablis = $(tabs.join('')).prependTo(tabset).find('>li')
+			
+			// find open tab index from hash if given	
+			if (hashid && openindex == 0) {
+				var hashelement = $('#'+hashid)
+				if (hashelement.length) {
+					var tabcontents = tabset.find(settings.tabcontentSelector),
+						parents = hashelement.parents(),
+						parentslen = parents.length
+						
+					tabcontents.each(function(index){
+						if (0 == openindex) {
+							for (var x = parentslen; --x;) {								
+								if (this == parents[x]) {
+									openindex = index
+									break;
+								}
+							}
+						}
+					})
+				}
+			}
+						
+			if (settings.active) {
+				// init tab events
+				tabset.find('ol.tabs li')[settings.eventchange](function() {
+					if (!$(this).hasClass('tab-open')) {
+						var tab = $(this)
+							, content = tabset.find(settings.tabcontentSelector + ':eq(' + tab.prevAll('li').size() + ')')
+							, oldcontent = tabset.find(settings.tabcontentSelector + ':visible')
+						
+						// remove old highlight
+						tablis.removeClass('tab-open')
+						
+						// set new highlight
+						tab.addClass('tab-open')
+						
+						// toggle tab content
+						if (!settings.animateHeight) {
+							settings.contenthide(oldcontent)
+							settings.contentshow(content)
+						}
+						else {
+							content.height('auto') // full height!
+							
+							var newheight = content.height()
+							
+							content
+								.stop()
+								.show()
+								.height(oldcontent.height() || 0)
+								.animate({height: newheight}, 300)
+								
+							oldcontent
+								.stop()
+								.hide()							
+						}
+						
+						settings.callback(tab, content)
+					}
+				})
+				.bind({
+				    'mouseenter focus': function() { $(this).addClass('tab-hover') }, 
+				    'mouseleave blur': function() { $(this).removeClass('tab-hover') }, 
+					keypress: function(e) {
+						if (e.keyCode == 13) {
+							$(e.target)[settings.eventchange]()
+						}
+					}					
+				})
+				.attr('tabindex', 0)
+				
+				if (settings.allclosed) {
+					// on tabset leave close open content
+					tabset.mouseleave(function() {
+						tabset
+							.find('ol.tabs li').removeClass('tab-open').end()
+							.find(settings.tabcontentSelector + ':visible')[(settings.animateHeight) ? 'slideUp' : 'hide']()
+					})
+				}
+			}
+			
+			// close all contents (except open if not `allclosed`)
+	        tabset.find(settings.tabcontentSelector).hide()
+			
+	        // add highlight to open tab and open content if wanted
+			if (!settings.allclosed) {
+				// open and use callback if needed
+				tabset.find('ol.tabs li:eq(' + openindex + ')')[settings.eventchange]()
+				
+				/*
+				tabset.find('ol.tabs li:eq(' + openindex + ')').addClass('tab-open')
+				tabset.find(settings.tabcontentSelector + ':eq(' + openindex + ')').show()
+				*/
+			}
+			
+			// jump to open tab
+			if (openindex > 0) {
+				document.location.hash = document.location.hash
+			} 
+			
+	    })
+	}
+	$.fn.tabset.VERSION = '1.13'
+})(jQuery)
+/* ../../js/head.js */
+var dpag = dpag || {}
+dpag.head = {
+	init: function(){		
+		// tabs
+		if($('.head .tabset').tabset) {
+			$('.head .tabset').tabset()
+		}
+		
+		// init search fields
+	    $('.head .head-input').each(function(){
+	        var ip = $(this),
+				form = this.form,
+	        	def = ip.val(),
+				btn = ip.next("input.head-submit");
+
+			// empty field on focus
+			ip
+			.focus(function(){
+        		ip.removeClass('head-input-placeholder')
+				if (ip.val() == def) {
+				    ip.val('')
+				}
+	        })
+			.blur(function(){
+	        	if (ip.val() == '') {
+	        		ip.val(def)
+	        		ip.addClass('head-input-placeholder')
+	        	}
+	        })
+
+	        // submit empty query instead of default text
+			btn.click(function() {
+				// empty q when default
+				if (def == ip.val()) {
+					ip.val('')
+				}
+			})
+	    })
+	}
+}
+$(dpag.head.init);

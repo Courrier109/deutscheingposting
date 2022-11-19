@@ -1,0 +1,87 @@
+$(function() {
+    $(":text,:password,select").focus(function() {
+        $(this).addClass("focus");
+    }).blur(function() {
+        $(this).removeClass("focus");
+    });
+    $(":text:first").focus();
+    $("#close-btn").click(function() {
+        top.window.close();
+    });
+	$("#SSLForm:not(.dont-validate)").submit(function() {
+		return validateForm();
+	});
+	$("#resetbtn").click(function() {
+		resetForm();
+		return false;
+	});
+});
+
+function validateForm() {
+    if ($("#CCBrand").prop("selectedIndex") == 0) {
+        showError("CCBrand", errorCCBrand);
+        return false;
+    }
+    if ($("#CCnr").val().search(/^[\*]+\d{3,4}$/) == -1
+		&& $("#CCnr").val().search(/^\d{13,19}$/) == -1) {
+        showError("CCnr", errorCCnr);
+        return false;
+    }
+    if ($("#KKMonth").prop("selectedIndex") == 0) {
+        showError("KKMonth", errorKKMonth);
+        return false;
+    }
+    if ($("#KKYear").prop("selectedIndex") == 0) {
+        showError("KKYear", errorKKYear);
+        return false;
+    }						
+    if ($("#cccvc").val().search(/^\d{3,4}$/) == -1) {
+        showError("cccvc", errorCccvc);
+        return false;
+    }
+	$("#resetbtn,#submitbtn").attr("disabled", "disabled");
+	showpayStatus();
+	return true;
+}
+
+function showError(elementId, msg) {
+	$("#error-box:visible").slideUp("fast", function() {
+		$("#error-box").text(msg);
+		$("#error-box").slideDown("fast");
+	});
+    $("#error-box:hidden").text(msg);
+    $("#error-box:hidden").slideDown("fast");
+	$("input,select").removeClass("error");
+	if (elementId != null) {
+		$("#" + elementId).addClass("error");
+		$("#" + elementId + ":first").focus();
+	}
+}
+
+function showpayStatus() {
+	if (!$("#error-box").is(":visible")) {
+		$("#process-box").slideDown("fast");
+	}
+	else {
+		$("#error-box").slideUp("fast", function() {
+			$("#process-box").slideDown("fast");
+		});
+	}
+}
+
+function resetForm() {
+	$("#error-box:visible").slideUp("fast");
+    $(":text,:password").val("");
+    $(":text,:password").removeClass("error");
+    $("select").prop("selectedIndex", 0);
+    $("select").removeClass("error");
+	$(".existing-value").hide();
+	$(":text,:password,select,#CCBrand-selects").show();
+	$("#resetbtn").val(labelResetButton);
+    $(":text:first").focus();
+}
+
+function showCVV(url) {
+	var cvcpopup = window.open(url, "CVCHelp", "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=635,height=510,top=100,left=120");
+	cvcpopup.focus();
+}

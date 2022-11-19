@@ -1,0 +1,25 @@
+<svg version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
+    viewBox="0 0 93 90" enable-background="new 0 0 93 90" xml:space="preserve">
+    <g>
+        <defs>
+            <linearGradient id="logo_1_" gradientUnits="userSpaceOnUse" x1="48" y1="0" x2="48" y2="87">
+                <stop offset="0" style="stop-color:#FFF4D8"></stop>
+                <stop offset="0.08" style="stop-color:#FFE580"></stop>
+                <stop offset="0.2822" style="stop-color:#FFD942"></stop>
+                <stop offset="0.4612" style="stop-color:#FFD012"></stop>
+                <stop offset="0.55" style="stop-color:#FFCC00"></stop>
+            </linearGradient>
+        </defs>
+        <polygon class="logo__svg-gradient" fill="url(#logo_1_)" points="90,87 5,87 5,0 5,0 90,0"></polygon>
+        <polygon class="logo__svg-ribbon" fill-rule="evenodd" clip-rule="evenodd" fill="#baa038" points="5,0 0,11 5,11"></polygon>
+        <g>
+            <polygon points="29,57 36,57 29,65 21,65"></polygon>
+            <polygon points="39,57 47,57 39,65 31,65"></polygon>
+            <polygon points="56,57 48,57 56,65 64,65"></polygon>
+            <polygon points="66,57 58,57 66,65 74,65"></polygon>
+        </g>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M61.286 35.886c1.317-3.586 2.235-9.045 2.425-12.867l13.487 3.352C76.12 42.176 64.245 56.02 46.627 56.013 26.699 56.006 18.995 38.71 20.032 25.604l5.854-1.859c-0.952 7.458 1.361 12.838 2.956 15.303 -1.898-10.551 6.08-19.093 16.067-19.099C53.892 19.942 61.322 26.491 61.286 35.886L61.286 35.886 61.286 35.886zM34.141 36.218c0-5.952 4.833-10.776 10.794-10.776 5.964 0 10.796 4.825 10.796 10.776s-4.832 10.776-10.796 10.776C38.974 46.994 34.141 42.169 34.141 36.218L34.141 36.218 34.141 36.218z"></path>
+        <polygon class="logo__svg-shadow" fill="#baa038" points="90,11 90,87 8,87 8,90 93,90 93,11"></polygon>
+    </g>
+</svg>

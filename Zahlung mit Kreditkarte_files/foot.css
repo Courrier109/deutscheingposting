@@ -1,0 +1,272 @@
+@charset "iso-8859-1";
+/* START @import "../../css/vars.css" */
+/* START @import "../../css/foot.css" */
+/*	foot;
+	$Id: foot.css 5001 2012-01-19 14:10:47Z ferdinandk $
+*/
+/* general */
+.foot {
+    position: relative;
+    padding-bottom: 2em;
+    background: #fff;
+    clear: both;
+    /* explicit 11px */
+    z-index: 1000;
+}
+.foot-functions {
+    padding-bottom: 3px;
+}
+.foot-function-print {
+    cursor: pointer;
+    display: none;
+    float: right;
+    background: url(../img/icons.png) no-repeat right -2197px;
+    min-width: 16px;
+    _width: 16px;
+    height: 16px;
+    padding-right: 20px;
+}
+.foot-function-print.foot-hide-print-text {
+    width: 16px;
+    padding-right: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.foot-function-print-active {
+    display: block;
+    _display: inline;
+}
+.foot-function-social {
+    float: right;
+    margin-left: 16px;
+}
+.foot-function-social a {
+    float: left;
+    background: url(../img/icons_standalone.png) no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-left: 3px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.foot-function-social a:hover, .foot-function-social a:focus {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* for IE8 */
+    filter: alpha(opacity=50);
+    /* for IE5-7 */
+    opacity: 0.5;
+}
+.foot-function-social .social-fb {
+    background-position: -60px -17px;
+}
+.foot-function-social .social-twitter {
+    background-position: -60px 0;
+}
+.foot-function-social .social-delicious {
+    background-position: -60px -34px;
+}
+.foot-function-social .social-more {
+    background-position: -60px -34px;
+}
+.foot-function-social .social-google {
+    background-position: -77px 0;
+}
+.foot-function-social .social-wong {
+    background-position: -77px -17px;
+}
+.foot-function-social .social-digg {
+    background-position: -77px -34px;
+}
+.foot-function-social .social-netvibes {
+    background-position: -94px -17px;
+}
+.foot-function-social .social-addthis {
+    background-position: -94px 0;
+}
+.foot-content {
+    border: 1px solid #ccc;
+    border-width: 1px 0;
+    font-size: 0.917em;
+    padding-bottom: 2px;
+}
+.foot-content a.standalone, .foot-area-1 .inline a {
+    display: inline-block;
+    margin: 5px 0 0;
+    line-height: 1.3em;
+    background-position: 1px -1596px;
+}
+.foot-area-1 {
+    _display: inline;
+    _width: 750px;
+    float: left;
+}
+.foot-contact, .foot-area-1 .inline {
+    _display: inline;
+    float: left;
+}
+.foot-area-1 .inline a {
+    _display: inline;
+    float: left;
+    margin-right: 1.78em;
+}
+.foot-contact p {
+    _display: inline;
+    float: left;
+    line-height: 22px;
+    margin-right: 19px;
+}
+.foot .foot-phone {
+    font-style: normal;
+    font-size: 1.2em;
+    margin-left: 0.45em;
+}
+.foot-hints {
+    clear: both;
+    color: #999;
+    font-size: 0.93em;
+    line-height: 1.2em;
+    margin-bottom: 3px;
+}
+.foot-hints span {
+    position: relative;
+    display: inline-block;
+    width: 1.1em;
+}
+.foot-area-2 {
+    float: right;
+    width: 212px;
+    text-align: right;
+}
+.foot-content .foot-area-2 ul.inline {
+    _display: inline;
+    float: right;
+}
+.foot-area-2 ul.linklist li {
+    display: inline;
+    margin: 0;
+    line-height: 1.18em;
+}
+.foot-area-2 ul.inline a {
+    float: left;
+    background-position: 1px -1596px;
+    margin-left: 1.8em;
+    line-height: 1.3em;
+    white-space: nowrap;
+}
+
+/* foot of the foot! */
+.foot-sub {
+    padding-top: 1px;
+    color: #999;
+}
+.foot-sub .foot-area-1 {
+    margin-top: 3px;
+    height: 2.55em;
+}
+.foot-sub .foot-area-1 ul, .foot-sub .foot-area-2 ul.inline {
+    position: absolute;
+    float: none;
+    bottom: 0;
+}
+.foot-sub ul.inline a {
+    _display: inline;
+    float: left;
+    line-height: 12px;
+    padding-right: 5px;
+    margin: 0 5px 0 0;
+    border-right: 1px solid #999;
+    color: #999;
+    overflow: visible;
+}
+.foot-sub ul.inline .last a {
+    margin: 0;
+    padding: 0;
+    border-right: 0;
+}
+/* for all areas */
+.foot .linklist {
+    margin: 0;
+}
+.foot .foot-content .linklist li {
+    display: inline;
+    margin: 0;
+}
+.foot abbr {
+    border: 0;
+}
+/*
+	/general 
+	shop specific;
+*/
+.foot-shop .foot-content {
+    padding: 0.3em 0 0.1em;
+}
+.foot-shop .foot-area-2 {
+    text-align: left;
+}
+.foot-shop h3 {
+    font-weight: 700;
+    font-size: 1em;
+    text-align: left;
+    margin-bottom: 0.25em;
+}
+.foot-shop .foot-content .foot-area-1 .linklist {
+    width: 167px;
+    margin-bottom: 0.1em;
+}
+.foot-shop .foot-content .foot-area-1 ul a, .foot-shop .foot-content .foot-area-2 ul a {
+    float: none;
+    display: block;
+    margin: 0 0 0.15em;
+}
+.foot-shop .foot-payment-methods {
+    float: left;
+}
+.foot-payment-methods .inline {
+    display: block;
+    float: none;
+    margin-bottom: 4px;
+}
+.foot-shop .foot-payment-methods p {
+    _display: inline;
+    float: left;
+    width: 100px;
+    height: 32px;
+    margin-right: 15px;
+    background: url(../img/icons_standalone.png) no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.foot-payment-methods p.payment-ec {
+    width: 27px;
+    background-position: 0 -28px;
+}
+.foot-payment-methods p.payment-visa {
+    width: 48px;
+    background-position: -54px -126px;
+}
+.foot-payment-methods p.payment-mastercard {
+    width: 53px;
+    background-position: -2px -92px;
+}
+.foot-payment-methods p.payment-amex {
+    width: 51px;
+    background-position: 0 -126px;
+}
+.foot-payment-methods p.payment-giropay {
+    width: 69px;
+    background-position: 0 -60px;
+    height: 31px;
+}
+.foot-payment-methods p.payment-postcard {
+    width: 95px;
+    background-position: 0 -159px;
+}
+.foot-shop .foot-area-2 ul.foot-col-1, .foot-shop .foot-area-2 ul.foot-col-2 {
+    float: left;
+    padding: 0;
+    margin: 0 0 0.2em;
+}
+.foot-shop .foot-area-2 ul.foot-col-2, .foot-shop .foot-area-2 ul.foot-col-3 {
+    margin-left: 24px;
+}
